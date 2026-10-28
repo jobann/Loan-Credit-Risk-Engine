@@ -1,12 +1,16 @@
-import logging
-import pandas as pd
+from pathlib import Path
+import joblib
 
+def save_artifact(obj, filepath) -> None:
+    """Save a model, preprocessor, or metadata to disk."""
+    path = Path(filepath)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(obj, path)
 
-def setup_logger(name: str = 'credit_risk')-> logging.Logger:
-    pass
-
-
-def reduce_mem_usage(df: pd.DataFrame) -> pd.DataFrame:
-    pass
-
+def load_artifact(filepath):
+    """Load a saved artifact from disk."""
+    path = Path(filepath)
+    if not path.exists():
+        raise FileNotFoundError(f"Artifact not found at {path}")
+    return joblib.load(path)
 
