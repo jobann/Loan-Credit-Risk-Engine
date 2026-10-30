@@ -5,20 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482c7e97-00f3-4641-a0f3-0ea0da00bb97" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/bureau_visualization.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/evaluate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/predict.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/previous_application_visualization.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Loan Credit Risk Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Loan Credit Risk Engine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/credit_risk_lgb.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/preprocessor.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visualization/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visualization/eda.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/eda.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/credit_risk_lgb.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/models/credit_risk_lgb.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/preprocessor.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/models/preprocessor.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/eda_bureau/01_status_and_types.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/eda_bureau/02_active_loans_vs_default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/eda_bureau/03_delinquency_vs_default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/feature_importance.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/feature_importance.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/model_evaluation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

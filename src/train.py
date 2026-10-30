@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from src.features import ApplicationPreprocessor
+from src.features import ApplicationPreprocessor, aggregate_bureau_features, aggregate_previous_applications
 from sklearn.model_selection import StratifiedKFold
 import lightgbm as lgb
 from sklearn.metrics import roc_auc_score
@@ -24,7 +24,15 @@ def train_model(datapath: str="../data/application_train.csv", nrows: int=5000):
     print(f"\n--- 1. LOADING DATA ({nrows}) ---")
     df=pd.read_csv(datapath, nrows=nrows)
 
-    print("--- 2. PREPROCESSING AND FEATURE ENGINEERING ---")
+    # Merge bureau features!
+    bureau_features = aggregate_bureau_features()
+    df = df.merge(bureau_features, on='SK_ID_CURR', how='left')
+
+    # 2. Merge previous application features (Our bank's history)
+    prev_features = aggregate_previous_applications()
+    df = df.merge(prev_features, on='SK_ID_CURR', how='left')
+
+    print("\n--- 2. PREPROCESSING AND FEATURE ENGINEERING ---")
     preprocessor = ApplicationPreprocessor()
     X, y = preprocessor.fit_transform(df)
 
