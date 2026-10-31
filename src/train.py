@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 
-from src.features import ApplicationPreprocessor, aggregate_bureau_features, aggregate_previous_applications
+from src.features import ApplicationPreprocessor, aggregate_bureau_features, aggregate_previous_applications, \
+    aggregate_installments_payments, aggregate_credit_card_balance, aggregate_pos_cash
 from sklearn.model_selection import StratifiedKFold
 import lightgbm as lgb
 from sklearn.metrics import roc_auc_score
@@ -31,6 +32,18 @@ def train_model(datapath: str="../data/application_train.csv", nrows: int=5000):
     # 2. Merge previous application features (Our bank's history)
     prev_features = aggregate_previous_applications()
     df = df.merge(prev_features, on='SK_ID_CURR', how='left')
+
+    # 3. Merge installment payment features (Repayment discipline!)
+    installments_features = aggregate_installments_payments()
+    df = df.merge(installments_features, on='SK_ID_CURR', how='left')
+
+    # 4. Credit card utilization & ATM advances
+    cc_features = aggregate_credit_card_balance()
+    df = df.merge(cc_features, on='SK_ID_CURR', how='left')
+
+    # 5. Point-of-sale appliance and cash loan snapshots
+    pos_features = aggregate_pos_cash()
+    df = df.merge(pos_features, on='SK_ID_CURR', how='left')
 
     print("\n--- 2. PREPROCESSING AND FEATURE ENGINEERING ---")
     preprocessor = ApplicationPreprocessor()

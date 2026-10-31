@@ -58,7 +58,6 @@ def aggregate_bureau_features(bureau_path: str = "../data/bureau.csv") -> pd.Dat
 
 def aggregate_previous_applications(prev_path: str = "../data/previous_application.csv") -> pd.DataFrame:
     """
-    Aggregates 1.67M past Home Credit loan applications down to 1 row per applicant.
     Captures past refusal rates, approved counts, and credit amounts.
     """
     print("Loading and aggregating previous_application.csv...")
@@ -84,6 +83,74 @@ def aggregate_previous_applications(prev_path: str = "../data/previous_applicati
     print(f"Aggregated {len(prev):,} past applications into {len(prev_agg):,} client profiles!")
     return prev_agg
 
+def aggregate_installments_payments(installments_path: str = "../data/installments_payments.csv") -> pd.DataFrame:
+    """
+    Captures payment delays (Days Past Due) and payment shortfalls.
+    """
+    print("Loading and aggregating installments_payments.csv...")
+    use_cols = ['SK_ID_CURR', 'DAYS_INSTALMENT', 'DAYS_ENTRY_PAYMENT', 'AMT_INSTALMENT', 'AMT_PAYMENT']
+    inst = pd.read_csv(installments_path, usecols=use_cols)
+
+    # 1. Feature Engineering
+    # Days Late: > 0 means paid late
+    inst['DAYS_LATE'] = (inst['DAYS_ENTRY_PAYMENT'] - inst['DAYS_INSTALMENT']).clip(lower=0)
+    # Payment Shortfall: > 0 means underpaid
+    inst['SHORTFALL'] = (inst['AMT_INSTALMENT'] - inst['AMT_PAYMENT']).clip(lower=0)
+
+    # 2. Aggregations per applicant
+    inst_agg = inst.groupby('SK_ID_CURR').agg(
+        INSTAL_COUNT=('DAYS_INSTALMENT', 'count'),
+        INSTAL_MAX_DAYS_LATE=('DAYS_LATE', 'max'),
+        INSTAL_MEAN_DAYS_LATE=('DAYS_LATE', 'mean'),
+        INSTAL_TOTAL_SHORTFALL=('SHORTFALL', 'sum'),
+        INSTAL_MAX_SHORTFALL=('SHORTFALL', 'max')
+    ).reset_index()
+
+    print(f"Aggregated {len(inst):,} installment records into {len(inst_agg):,} client profiles!")
+    return inst_agg
+
+def aggregate_credit_card_balance(cc_path: str = "../data/credit_card_balance.csv") -> pd.DataFrame:
+    """
+    Captures card utilization ratio (Debt / Limit) and desperate ATM cash advances.
+    """
+    print("Loading and aggregating credit_card_balance.csv...")
+    use_cols = ['SK_ID_CURR', 'AMT_BALANCE', 'AMT_CREDIT_LIMIT_ACTUAL', 'AMT_DRAWINGS_ATM_CURRENT']
+    cc = pd.read_csv(cc_path, usecols=use_cols)
+
+    # 1. Calculate Utilization Ratio
+    cc['UTILIZATION'] = (cc['AMT_BALANCE'] / (cc['AMT_CREDIT_LIMIT_ACTUAL'] + 1e-5)).clip(0, 1.0)
+
+    # 2. Aggregations per cardholder
+    cc_agg = cc.groupby('SK_ID_CURR').agg(
+        CC_COUNT=('AMT_BALANCE', 'count'),
+        CC_BALANCE_MAX=('AMT_BALANCE', 'max'),
+        CC_BALANCE_MEAN=('AMT_BALANCE', 'mean'),
+        CC_UTILIZATION_MEAN=('UTILIZATION', 'mean'),
+        CC_UTILIZATION_MAX=('UTILIZATION', 'max'),
+        CC_ATM_DRAWINGS_SUM=('AMT_DRAWINGS_ATM_CURRENT', 'sum')
+    ).reset_index()
+
+    print(f"Aggregated {len(cc):,} card statements into {len(cc_agg):,} cardholder profiles!")
+    return cc_agg
+
+def aggregate_pos_cash(pos_path: str = "../data/POS_CASH_balance.csv") -> pd.DataFrame:
+    """
+    Captures delinquency on store loans and remaining future installment debt.
+    """
+    print("Loading and aggregating POS_CASH_balance.csv...")
+    use_cols = ['SK_ID_CURR', 'MONTHS_BALANCE', 'CNT_INSTALMENT_FUTURE', 'SK_DPD']
+    pos = pd.read_csv(pos_path, usecols=use_cols)
+
+    # Aggregations per applicant
+    pos_agg = pos.groupby('SK_ID_CURR').agg(
+        POS_COUNT=('MONTHS_BALANCE', 'count'),
+        POS_MAX_DPD=('SK_DPD', 'max'),
+        POS_MEAN_DPD=('SK_DPD', 'mean'),
+        POS_REMAINING_INSTALMENTS=('CNT_INSTALMENT_FUTURE', 'max')
+    ).reset_index()
+
+    print(f"Aggregated {len(pos):,} POS records into {len(pos_agg):,} client profiles!")
+    return pos_agg
 
 class ApplicationPreprocessor:
     """

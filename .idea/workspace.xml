@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482c7e97-00f3-4641-a0f3-0ea0da00bb97" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/previous_application_visualization.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Loan Credit Risk Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Loan Credit Risk Engine.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/04_installments_payments_visualization.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/05_credit_card_balance_visualization.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/06_POS_CASH_balance.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/credit_risk_lgb.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/models/credit_risk_lgb.joblib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/preprocessor.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/models/preprocessor.joblib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/eda_bureau/01_status_and_types.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/eda_bureau/02_active_loans_vs_default.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/eda_bureau/03_delinquency_vs_default.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/feature_importance.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/feature_importance.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/model_evaluation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Visualization_Notebooks/bureau_visualization.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/02_bureau_visualization.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Visualization_Notebooks/eda.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/01_application_train_visualization.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Visualization_Notebooks/previous_application_visualization.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/03_previous_application_visualization.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/features.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/train.py" afterDir="false" />
     </list>
@@ -110,37 +108,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.Playground.executor&quot;: &quot;Run&quot;,
-    &quot;Python.evaluate.executor&quot;: &quot;Run&quot;,
-    &quot;Python.features.executor&quot;: &quot;Run&quot;,
-    &quot;Python.predict.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;datagrid.heatmap.switchedByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jobanpreetsingh/PycharmProjects/Loan Credit Risk Engine&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion.popup&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.Playground.executor": "Run",
+    "Python.evaluate.executor": "Run",
+    "Python.features.executor": "Run",
+    "Python.predict.executor": "Run",
+    "Python.train.executor": "Run",
+    "Python.utils.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "datagrid.heatmap.switchedByDefault": "false",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/jobanpreetsingh/PycharmProjects/Loan Credit Risk Engine",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
