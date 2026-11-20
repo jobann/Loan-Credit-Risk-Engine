@@ -56,6 +56,7 @@ def aggregate_bureau_features(bureau_path: str = "../data/bureau.csv") -> pd.Dat
     bureau_agg = bureau_agg.merge(active, on='SK_ID_CURR', how='left').fillna(0)
     return bureau_agg
 
+
 def aggregate_previous_applications(prev_path: str = "../data/previous_application.csv") -> pd.DataFrame:
     """
     Captures past refusal rates, approved counts, and credit amounts.
@@ -71,8 +72,10 @@ def aggregate_previous_applications(prev_path: str = "../data/previous_applicati
     ).reset_index()
 
     # 2. Count refusals and approvals specifically
-    refused = prev[prev["NAME_CONTRACT_STATUS"] == "Refused"].groupby("SK_ID_CURR")["SK_ID_PREV"].count().rename("PREV_REFUSED_COUNT")
-    approved = prev[prev["NAME_CONTRACT_STATUS"] == "Approved"].groupby("SK_ID_CURR")["SK_ID_PREV"].count().rename("PREV_APPROVED_COUNT")
+    refused = prev[prev["NAME_CONTRACT_STATUS"] == "Refused"].groupby("SK_ID_CURR")["SK_ID_PREV"].count().rename(
+        "PREV_REFUSED_COUNT")
+    approved = prev[prev["NAME_CONTRACT_STATUS"] == "Approved"].groupby("SK_ID_CURR")["SK_ID_PREV"].count().rename(
+        "PREV_APPROVED_COUNT")
 
     prev_agg = prev_agg.merge(refused, on="SK_ID_CURR", how="left").fillna(0)
     prev_agg = prev_agg.merge(approved, on="SK_ID_CURR", how="left").fillna(0)
@@ -82,6 +85,7 @@ def aggregate_previous_applications(prev_path: str = "../data/previous_applicati
 
     print(f"Aggregated {len(prev):,} past applications into {len(prev_agg):,} client profiles!")
     return prev_agg
+
 
 def aggregate_installments_payments(installments_path: str = "../data/installments_payments.csv") -> pd.DataFrame:
     """
@@ -109,6 +113,7 @@ def aggregate_installments_payments(installments_path: str = "../data/installmen
     print(f"Aggregated {len(inst):,} installment records into {len(inst_agg):,} client profiles!")
     return inst_agg
 
+
 def aggregate_credit_card_balance(cc_path: str = "../data/credit_card_balance.csv") -> pd.DataFrame:
     """
     Captures card utilization ratio (Debt / Limit) and desperate ATM cash advances.
@@ -133,6 +138,7 @@ def aggregate_credit_card_balance(cc_path: str = "../data/credit_card_balance.cs
     print(f"Aggregated {len(cc):,} card statements into {len(cc_agg):,} cardholder profiles!")
     return cc_agg
 
+
 def aggregate_pos_cash(pos_path: str = "../data/POS_CASH_balance.csv") -> pd.DataFrame:
     """
     Captures delinquency on store loans and remaining future installment debt.
@@ -151,6 +157,41 @@ def aggregate_pos_cash(pos_path: str = "../data/POS_CASH_balance.csv") -> pd.Dat
 
     print(f"Aggregated {len(pos):,} POS records into {len(pos_agg):,} client profiles!")
     return pos_agg
+
+
+def aggregate_bureau_balance(
+        bb_path: str = "../data/bureau_balance.csv",
+        bureau_path: str = "../data/bureau.csv"
+) -> pd.DataFrame:
+    """
+    Traverses the Snowflake Schema: Months -> Loans (SK_ID_BUREAU) -> Person (SK_ID_CURR).
+    """
+    print("Loading and aggregating bureau_balance.csv (27.3M rows)...")
+    bb = pd.read_csv(bb_path)
+
+    # 1. Map status codes to numeric severity (0 = clean, 1..5 = delinquency severity)
+    status_map = {'C': 0, '0': 0, 'X': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5}
+    bb['SEVERITY'] = bb['STATUS'].map(status_map).fillna(0).astype('int8')
+
+    # Step A: Aggregate by Loan (SK_ID_BUREAU)
+    bb_loan_agg = bb.groupby('SK_ID_BUREAU').agg(
+        BB_MAX_SEVERITY=('SEVERITY', 'max'),
+        BB_MONTHS_COUNT=('MONTHS_BALANCE', 'count')
+    ).reset_index()
+
+    # Step B: Traverse Bridge (bureau.csv) to attach SK_ID_CURR
+    bureau_bridge = pd.read_csv(bureau_path, usecols=['SK_ID_CURR', 'SK_ID_BUREAU'])
+    bureau_merged = bureau_bridge.merge(bb_loan_agg, on='SK_ID_BUREAU', how='inner')
+
+    # Step C: Aggregate by Applicant (SK_ID_CURR)
+    bb_client_agg = bureau_merged.groupby('SK_ID_CURR').agg(
+        BB_WORST_SEVERITY=('BB_MAX_SEVERITY', 'max'),
+        BB_TOTAL_MONTHS=('BB_MONTHS_COUNT', 'sum')
+    ).reset_index()
+
+    print(f"Hierarchical aggregation complete: mapped into {len(bb_client_agg):,} client profiles!")
+    return bb_client_agg
+
 
 class ApplicationPreprocessor:
     """

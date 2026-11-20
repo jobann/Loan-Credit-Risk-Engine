@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482c7e97-00f3-4641-a0f3-0ea0da00bb97" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/04_installments_payments_visualization.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/05_credit_card_balance_visualization.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/06_POS_CASH_balance.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/bureau_balance_visualization.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/credit_risk_lgb.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/models/credit_risk_lgb.joblib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/preprocessor.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/models/preprocessor.joblib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visualization_Notebooks/bureau_visualization.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/02_bureau_visualization.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visualization_Notebooks/eda.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/01_application_train_visualization.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Visualization_Notebooks/previous_application_visualization.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/Visualization_Notebooks/03_previous_application_visualization.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/predict.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -112,6 +109,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.Playground.executor": "Run",
+    "Python.app.executor": "Run",
     "Python.evaluate.executor": "Run",
     "Python.features.executor": "Run",
     "Python.predict.executor": "Run",

@@ -7,3 +7,4 @@ jupyter>=1.0.0
 lightgbm>=4.0.0
 xgboost>=1.7.0
 joblib
+streamlit
